@@ -1,7 +1,10 @@
-import { showHUD, Clipboard } from "@raycast/api";
+import { Clipboard, showHUD } from "@raycast/api";
+import { generateBirthNumber } from "./generate-birth-number";
+
+const randomBoolean = () => Math.random() < 0.5;
 
 export default async function main() {
-  const now = new Date();
-  await Clipboard.copy(now.toLocaleDateString());
-  await showHUD("Copied date to clipboard");
+  const { birthNumber } = generateBirthNumber({ isFemale: randomBoolean() });
+  await Clipboard.copy(birthNumber);
+  await showHUD(`Birth number ${birthNumber} copied to clipboard`);
 }
